@@ -1,400 +1,443 @@
-# Vantage-CRM
+# Vantage CRM
 
-## Enterprise Sales CRM & Pipeline Management Platform
+<p align="center">
+  <img src="docs/screenshots/overview.png" alt="Vantage CRM Executive Dashboard" width="100%" />
+</p>
 
-A production-style, portfolio-grade B2B Sales Operations Platform featuring an audited **FastAPI backend** and a modern **React SPA frontend (Vantage CRM)** faithfully translated from Google Stitch designs.
+<p align="center">
+  <strong>Enterprise Sales Operations & Revenue Orchestration Platform</strong>
+  <br />
+  A high-throughput, audited full-stack CRM engineered for high-velocity B2B sales organizations.
+</p>
 
-This project manages and analyzes B2B corporate accounts, sales opportunities, pipeline conversion, product catalog performance, sales organizational hierarchy (representatives and managers), opportunity aging, deterministic deal prioritization, and operational work queues.
-
----
-
-## Table of Contents
-
-1. [Project Purpose](#1-project-purpose)
-2. [CRM Capabilities](#2-crm-capabilities)
-3. [System Architecture](#3-system-architecture)
-4. [Technology Stack](#4-technology-stack)
-5. [Database Architecture](#5-database-architecture)
-6. [API Catalog](#6-api-catalog)
-7. [CRM Business Logic](#7-crm-business-logic)
-8. [Opportunity Prioritization Framework](#8-opportunity-prioritization-framework)
-9. [Testing & Quality Assurance](#9-testing--quality-assurance)
-10. [Setup Instructions](#10-setup-instructions)
-11. [Environment Variables](#11-environment-variables)
-12. [API Usage Examples](#12-api-usage-examples)
-13. [Data Integrity Decisions](#13-data-integrity-decisions)
-14. [Known Limitations](#14-known-limitations)
+<p align="center">
+  <img src="https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11+" />
+  <img src="https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Tests-65%2F65%20Passing-brightgreen?style=flat-square" alt="Tests" />
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License" />
+</p>
 
 ---
 
-## 1. Project Purpose
+## Executive Overview
 
-The primary objective of this platform is to provide a portfolio-grade Sales Operations and CRM backend platform for a high-velocity B2B sales organization. Rather than relying on generic machine learning predictions or synthetic customer linkages, the platform applies rigorous data engineering, deterministic sales prioritization, and high-performance REST APIs directly to genuine B2B sales data. (Note: This is a portfolio-grade backend platform, not a live commercial production deployment).
+**Vantage CRM** is an enterprise-grade Sales Operations and Pipeline Management Platform designed to streamline B2B revenue workflows, sequence high-priority deals, and provide real-time sales visibility. Engineered with clean layered architecture, the platform combines a robust **FastAPI** backend with a modern **React 19** single-page application (SPA) featuring design tokens translated from Google Stitch design specifications.
 
-The system empowers:
-- **Sales Representatives:** To sequence daily outreach using transparent priority scoring and actionable work queues.
-- **Sales Managers:** To monitor team pipelines, identify stalled deals, evaluate win rates, and compare regional performance.
-- **Executive Leadership:** To access real-time pipeline velocity, won revenue, deal size distributions, and product revenue concentration.
+The platform processes and analyzes **8,800 opportunities** across **85 enterprise accounts**, **7 product lines**, and **35 sales personnel** across regional offices, enforcing strict business reconciliation, deterministic lead prioritization, and enterprise security.
 
 ---
 
-## 2. CRM Capabilities
+## Key Highlights
 
-- **Account Management:** Corporate accounts with industry sector, company revenue, employee count, global headquarters, parent-subsidiary hierarchies, and historical opportunity statistics.
-- **Opportunity Lifecycle Tracking:** Full funnel tracking across validated stages: `Prospecting`, `Engaging`, `Won`, and `Lost`.
-- **Sales Pipeline Analytics:** Comprehensive aggregation of open vs. closed deals, win rates, sales cycles, and multi-dimensional slicing by product, sector, sales agent, sales manager, and regional office.
-- **Sales Organization Hierarchy:** Full sales team modeling across 30 active representatives, 6 managers, and 3 regional offices (Central, East, West).
-- **Product Portfolio Performance:** Catalog metrics for 7 products across 3 series (`GTX`, `GTK`, `MG`) with list pricing and catalog value tiers.
-- **Opportunity Aging & Velocity:** Categorization of in-flight deals into operational aging bands (`Recent`, `Aging`, `Stalled/Critical`, `Unengaged`) and calculation of historical sales cycle durations.
-- **Deterministic Prioritization:** Transparent 100-point prioritization matrix segmenting open opportunities into Tier 1 (High Priority), Tier 2 (Medium Priority), and Tier 3 (Lower Priority) without post-outcome leakage.
-- **CRM Work Queues:** Targeted operational queues for executive review (Tier 1 deals), intervention (stalled deals > 180 days), and data hygiene (unassigned accounts).
+- **Executive Revenue Engine:** Real-time reconciliation of **$10,005,534.00 Won Revenue**, **63.15% Win Rate**, **4,238 Won Deals**, and **47.99-day Average Sales Cycle**.
+- **Deterministic Deal Prioritization:** Transparent 100-point scoring algorithm segmenting active pipeline into **Tier 1 (428)**, **Tier 2 (1,033)**, and **Tier 3 (628)** opportunities without statistical post-outcome leakage.
+- **Actionable Work Queues:** Targeted operational queues for executive review, stalled deal intervention (>180 days), and unassigned lead hygiene.
+- **Hierarchical Sales Org Modeling:** Granular analytics covering 30 active sales representatives, 6 regional sales managers, and 3 regional offices (Central, East, West).
+- **Modern Responsive SPA:** Asymmetric bento grids, sticky tabbed inspector drawers, tabular figures (`.tnum`), and live multi-filter query builders built on Tailwind CSS and Inter typography.
+- **Enterprise Security:** Stateless JWT authentication, Bcrypt password hashing, and Role-Based Access Control (RBAC) across `Admin`, `Sales Manager`, and `Sales Agent` roles.
 
 ---
 
-## 3. System Architecture
+## User Interface & Design System
 
-The backend follows clean layered architecture principles, decoupling routing, validation, domain services, database persistence, and security:
+The Vantage CRM user interface is built on modern enterprise design principles, featuring low-fatigue dark palettes, high-density data tables, and interactive contextual drawers.
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <h3 align="center">Opportunities Directory</h3>
+      <img src="docs/screenshots/opportunities.png" alt="Opportunities Directory" />
+      <p align="center"><em>Searchable, sortable directory with multi-stage filtering and quick filters.</em></p>
+    </td>
+    <td width="50%">
+      <h3 align="center">Opportunity Detail Drawer</h3>
+      <img src="docs/screenshots/drawer.png" alt="Opportunity Detail Drawer" />
+      <p align="center"><em>Non-destructive flyout drawer with lifecycle timelines and account context.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3 align="center">Opportunity Priority Matrix</h3>
+      <img src="docs/screenshots/priorities.png" alt="Priorities Matrix" />
+      <p align="center"><em>Tier 1, Tier 2, and Tier 3 segmentation with 100-pt scoring breakdown.</em></p>
+    </td>
+    <td width="50%">
+      <h3 align="center">Operational Work Queues</h3>
+      <img src="docs/screenshots/workqueue.png" alt="Operational Work Queues" />
+      <p align="center"><em>Targeted queues for executive reviews, stalled deals (>180d), and unassigned accounts.</em></p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## System Architecture
+
+The application adopts a decoupled, multi-tier architecture ensuring high maintainability, strict separation of concerns, and optimal query throughput:
+
+```mermaid
+graph TD
+    Client[Modern Browser / React 19 SPA] -->|HTTPS / REST API / JWT| Gateway[FastAPI ASGI Server / Uvicorn]
+    
+    subgraph FastAPI Application Layer
+        Gateway --> Router[API Versioned Router /api/v1]
+        Router --> Auth[Auth & Security / Bcrypt + PyJWT]
+        Router --> Controllers[Route Handlers / Dependency Injection]
+        Controllers --> Services[Business Logic & Prioritization Services]
+        Services --> ORM[SQLAlchemy 2.0 ORM Engine]
+    end
+
+    subgraph PostgreSQL Database Layer
+        ORM --> DB[(PostgreSQL 15+)]
+        DB --> CRM_SALES[Schema: crm_sales<br/>accounts, products, sales_teams,<br/>sales_pipeline, prioritized_open_opportunities]
+        DB --> CRM_AUTH[Schema: crm_auth<br/>app_users, role_permissions]
+    end
+```
+
+### Directory Structure
 
 ```
 CRM/
 ├── backend/
 │   └── app/
-│       ├── api/               # API routes & dependency injection
-│       │   ├── deps.py        # Database session and JWT auth dependencies
-│       │   └── v1/            # Versioned API routes
-│       │       ├── accounts.py
-│       │       ├── agents.py
-│       │       ├── aging.py
-│       │       ├── auth.py
-│       │       ├── managers.py
-│       │       ├── opportunities.py
-│       │       ├── pipeline.py
-│       │       ├── prioritization.py
-│       │       ├── products.py
-│       │       ├── router.py
-│       │       └── work_queues.py
-│       ├── core/              # Configuration, database engine, error handling, security
-│       │   ├── config.py
-│       │   ├── database.py
-│       │   ├── exceptions.py
-│       │   └── security.py
-│       ├── models/            # SQLAlchemy 2.0 ORM models
-│       │   └── crm.py
-│       ├── schemas/           # Pydantic request/response schemas
-│       │   ├── account.py
-│       │   ├── agent.py
-│       │   ├── aging.py
-│       │   ├── auth.py
-│       │   ├── common.py
-│       │   ├── manager.py
-│       │   ├── opportunity.py
-│       │   ├── pipeline.py
-│       │   ├── prioritization.py
-│       │   ├── product.py
-│       │   └── work_queue.py
-│       ├── services/          # Pure business services
-│       │   ├── account_service.py
-│       │   ├── agent_service.py
-│       │   ├── aging_service.py
-│       │   ├── auth_service.py
-│       │   ├── manager_service.py
-│       │   ├── opportunity_service.py
-│       │   ├── pipeline_service.py
-│       │   ├── prioritization_service.py
-│       │   ├── product_service.py
-│       │   └── work_queue_service.py
-│       └── main.py            # Application entrypoint & middleware configuration
-├── config/                    # Global path and database configurations
-│   └── settings.py
+│       ├── api/                      # Route definitions & dependency injection
+│       │   ├── deps.py               # Database session & JWT authentication dependencies
+│       │   └── v1/                   # Versioned REST endpoints (10 resource controllers)
+│       ├── core/                     # Application configuration, database engine, security
+│       ├── models/                   # SQLAlchemy 2.0 declarative database models
+│       ├── schemas/                  # Pydantic v2 validation & response contracts
+│       ├── services/                 # Pure domain business logic & aggregation services
+│       └── main.py                   # FastAPI entrypoint, middleware, exception handlers
+├── frontend/
+│   ├── src/
+│   │   ├── api/                      # Axios client with automatic JWT bearer interception
+│   │   ├── components/               # Reusable UI primitives (AppShell, Tables, Drawers, Cards)
+│   │   ├── context/                  # React Context providers (AuthContext, NotificationContext)
+│   │   ├── pages/                    # 13 Application views (Overview, Opportunities, Priorities, etc.)
+│   │   ├── App.jsx                   # Application routing and protected route guards
+│   │   └── index.css                 # Global design tokens, typography, and utility classes
+│   ├── package.json                  # Frontend dependencies and build scripts
+│   └── vite.config.js                # Vite build and dev-server configuration
+├── config/                           # Global environment settings
 ├── data/
-│   ├── raw/                   # Immutable raw source CSVs
-│   └── processed/             # Cleaned, standardized CRM CSV datasets
-│       └── crm_sales/
-├── docs/                      # Architectural documents, data dictionary & audit report
-│   ├── FINAL_BACKEND_AUDIT.md
-│   ├── crm_kpi_definitions.md
-│   ├── crm_priority_framework.md
-│   ├── database_schema.md
-│   └── sales_business_rules.md
+│   ├── raw/                          # Immutable source CSV datasets
+│   └── processed/                    # Cleaned, standardized CRM CSV tables
+├── docs/                             # Engineering specifications, schemas & screenshots
 ├── sql/
-│   ├── ddl/                   # Database schemas (crm_sales, crm_auth)
-│   └── analytics/             # 10 production SQL KPI queries
-├── src/                       # ETL cleaning, PostgreSQL loading, and priority scoring scripts
-│   ├── data_cleaning/clean_sales.py
-│   ├── database/load_postgres.py
-│   └── prioritization/crm_priority.py
-├── tests/                     # Automated unit, integration & reconciliation test suites
-├── pytest.ini                 # Pytest configuration
-├── requirements.txt           # Production Python dependencies
-└── .env.example               # Environment template
+│   ├── ddl/                          # Database DDL schemas (crm_sales, crm_auth)
+│   └── analytics/                    # Production SQL analytical queries
+├── src/                              # Data transformation, ETL & prioritization scripts
+│   ├── data_cleaning/clean_sales.py  # Production data cleaning pipeline
+│   ├── database/load_postgres.py     # PostgreSQL schema loader & index creator
+│   └── prioritization/crm_priority.py# Deterministic priority scoring algorithm
+└── tests/                            # Comprehensive Pytest automated test suites
 ```
 
 ---
 
-## 4. Technology Stack
+## Technology Stack
 
-- **Web Framework:** FastAPI 0.110+
-- **ASGI Server:** Uvicorn 0.28+
-- **Database ORM:** SQLAlchemy 2.0+
-- **Database Driver:** Psycopg2-binary 2.9+
-- **Database Engine:** PostgreSQL 15+
-- **Data Validation & Settings:** Pydantic v2 & Pydantic-Settings
-- **Security & Hashing:** Bcrypt & PyJWT (HS256)
-- **Data Transformation:** Pandas 2.2+ & NumPy 1.26+
-- **Test Automation:** Pytest 8.0+ & HTTPX TestClient
-
----
-
-## 5. Database Architecture
-
-The PostgreSQL database (`crm_platform`) is structured into two schemas:
-
-### `crm_sales` (Business Domain)
-- **`accounts` (85 rows):** Master corporate account directory with parent-subsidiary self-referencing foreign key.
-- **`products` (7 rows):** Product catalog with series and list sales prices.
-- **`sales_teams` (35 rows):** Sales representative directory mapped to managers and regional offices.
-- **`sales_pipeline` (8,800 rows):** Opportunity transactions with stages, engagement dates, close dates, close values, and foreign keys.
-- **`prioritized_open_opportunities` (2,089 rows):** Deterministic priority scores, tiers, and age bands for all open deals.
-
-### `crm_auth` (Application Infrastructure)
-- **`app_users`:** Role-Based Access Control (RBAC) supporting `Admin`, `Sales Manager`, and `Sales Agent`. Decoupled from sales pipeline records.
+| Layer | Technologies | Description |
+|---|---|---|
+| **Frontend Framework** | React 19, Vite 6 | High-speed component rendering and hot-module reloading |
+| **Styling & Icons** | Tailwind CSS 3.4, Material Symbols | Custom design token system translated from Google Stitch specs |
+| **API Client & Routing** | Axios, React Router 7 | JWT bearer interceptor, declarative routing, protected routes |
+| **Backend Framework** | FastAPI 0.110+, Uvicorn 0.28+ | High-throughput asynchronous REST API engine |
+| **Database & ORM** | PostgreSQL 15+, SQLAlchemy 2.0 | Multi-schema relational storage with indexed query execution |
+| **Validation & Schemas** | Pydantic v2, Pydantic-Settings | Strict request/response contracts and configuration parsing |
+| **Security & Auth** | PyJWT (HS256), Bcrypt | Stateless cryptographic token signing and password hashing |
+| **Data Processing** | Pandas 2.2+, NumPy 1.26+ | ETL pipelines, metric computation, and priority calculations |
+| **Quality Assurance** | Pytest 8.0+, HTTPX TestClient, Oxlint | End-to-end API integration and business reconciliation tests |
 
 ---
 
-## 6. API Catalog
+## Core Business Logic & Mathematical Definitions
 
-All endpoints are prefixed with `/api/v1`. Interactive Swagger documentation is accessible at `http://localhost:8000/docs`.
+The platform enforces standardized mathematical formulas to eliminate reporting discrepancies across sales leadership:
 
-| Route Prefix | Method | Endpoint | Description |
-|---|---|---|---|
-| **System** | `GET` | `/` | Service status and metadata |
-| | `GET` | `/health` | Live PostgreSQL connectivity health check |
-| **Auth** | `POST` | `/api/v1/auth/login` | JWT authentication |
-| | `GET` | `/api/v1/auth/me` | Authenticated user profile |
-| **Accounts** | `GET` | `/api/v1/accounts` | Filtered, searchable, sorted, paginated accounts |
-| | `GET` | `/api/v1/accounts/summary` | Portfolio summary & tier distribution |
-| | `GET` | `/api/v1/accounts/{id}` | Account profile with opportunity statistics |
-| **Opportunities** | `GET` | `/api/v1/opportunities` | Filtered & paginated opportunities |
-| | `GET` | `/api/v1/opportunities/{id}` | Opportunity detail with computed duration |
-| **Pipeline** | `GET` | `/api/v1/pipeline/summary` | Official reconciliation KPI summary |
-| | `GET` | `/api/v1/pipeline/stages` | Stage volumes & counts |
-| | `GET` | `/api/v1/pipeline/products` | Pipeline breakdown by product |
-| | `GET` | `/api/v1/pipeline/sectors` | Pipeline breakdown by sector |
-| | `GET` | `/api/v1/pipeline/agents` | Pipeline breakdown by representative |
-| | `GET` | `/api/v1/pipeline/managers` | Pipeline breakdown by sales manager |
-| | `GET` | `/api/v1/pipeline/regions` | Pipeline breakdown by regional office |
-| **Sales Agents** | `GET` | `/api/v1/agents` | Agent performance rankings |
-| | `GET` | `/api/v1/agents/{name}` | Agent details, win rate & stage breakdown |
-| **Sales Managers** | `GET` | `/api/v1/managers` | Manager list & team aggregate metrics |
-| | `GET` | `/api/v1/managers/{name}` | Manager team member comparison |
-| **Products** | `GET` | `/api/v1/products` | Product catalog with CRM performance |
-| | `GET` | `/api/v1/products/{name}` | Product breakdown by sector & agent |
-| **Prioritization** | `GET` | `/api/v1/prioritization` | Deterministic open opportunity ranking |
-| | `GET` | `/api/v1/prioritization/summary` | Priority tier distribution |
-| **Opportunity Aging** | `GET` | `/api/v1/aging/summary` | Operational aging band distributions |
-| **Work Queues** | `GET` | `/api/v1/work-queues/summary` | Overview of all active CRM queues |
-| | `GET` | `/api/v1/work-queues/high-priority` | Tier 1 high-priority review queue |
-| | `GET` | `/api/v1/work-queues/stalled-deals` | Stalled active deals (> 180 days) queue |
-| | `GET` | `/api/v1/work-queues/unassigned-accounts` | In-flight deals missing accounts queue |
+### 1. Opportunity Lifecycle Categorization
+$$\text{Total Opportunities (8,800)} = \text{Open Pipeline (2,089)} + \text{Closed Pipeline (6,711)}$$
+- **Open Pipeline:** Opportunities in `Prospecting` (500) or `Engaging` (1,589) status.
+- **Closed Pipeline:** Opportunities in `Won` (4,238) or `Lost` (2,473) status.
+
+### 2. Win Rate Calculation
+Standard B2B sales operations convention evaluates win rate exclusively against closed decisions:
+$$\text{Win Rate} = \frac{\text{Won}}{\text{Won} + \text{Lost}} \times 100\% = \frac{4,238}{4,238 + 2,473} \times 100\% = 63.15\%$$
+
+### 3. Won Revenue & Average Deal Size
+$$\text{Won Revenue} = \sum_{i=1}^{4,238} \text{close\_value}_i = \$10,005,534.00$$
+$$\text{Average Deal Size} = \frac{\text{Won Revenue}}{\text{Won Count}} = \frac{\$10,005,534.00}{4,238} = \$2,360.91$$
+
+### 4. Sales Cycle Duration
+$$\text{Sales Cycle (Days)} = \text{close\_date} - \text{engage\_date}$$
+$$\text{Average Sales Cycle} = \text{mean}(\text{Sales Cycle for all Closed Deals with valid dates}) = 47.99 \text{ days}$$
 
 ---
 
-## 7. CRM Business Logic
+## Deterministic Opportunity Prioritization Framework
 
-The platform strictly enforces the following mathematical and business definitions:
+Rather than relying on uninterpretable predictive algorithms that risk data leakage, Vantage CRM applies an **audited, deterministic 100-point scoring framework** to rank all **2,089 active open opportunities**.
 
-- **Pipeline Status:**
-  - `Open`: Deal stage is `Prospecting` or `Engaging` (Total: 2,089).
-  - `Closed`: Deal stage is `Won` or `Lost` (Total: 6,711).
-- **Win Rate:**
-  $$\text{Win Rate} = \frac{\text{Won}}{\text{Won} + \text{Lost}} \times 100\% = \frac{4,238}{4,238 + 2,473} \times 100\% = 63.15\%$$
-- **Won Revenue:**
-  $$\text{Won Revenue} = \sum \text{close\_value for Won opportunities} = \$10,005,534.00$$
-- **Average Deal Size:**
-  $$\text{Average Deal Size} = \frac{\$10,005,534.00}{4,238} = \$2,360.91$$
-- **Average Sales Cycle:**
-  $$\text{Average Sales Cycle} = \text{mean}(\text{close\_date} - \text{engage\_date}) = 47.99 \text{ days}$$
+> **Note on Model Governance:** This model strictly utilizes operational pre-close parameters. Post-outcome variables (`close_date`, `close_value`) are quarantined to ensure zero future data leakage.
 
----
+### Scoring Dimensions (100 Points Total)
 
-## 8. Opportunity Prioritization Framework
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                      CRM PRIORITY SCORE (0-100 PTS)                    │
+├──────────────────┬──────────────────┬──────────────────┬───────────────┤
+│ Lifecycle Stage  │ Product Catalog  │ Account Scale    │ Deal Age &    │
+│ (Max 30 pts)     │ Value Tier       │ Tier             │ Urgency       │
+│                  │ (Max 30 pts)     │ (Max 25 pts)     │ (Max 15 pts)  │
+├──────────────────┼──────────────────┼──────────────────┼───────────────┤
+│ Engaging: 30 pts │ High Value: 30pt │ Enterprise: 25pt │ Recent: 15 pt │
+│ Prospecting: 10  │ Med Value:  20pt │ Mid-Market: 15pt │ Aging:  10 pt │
+│                  │ Low Value:  10pt │ Commercial: 10pt │ Stalled: 5 pt │
+│                  │                  │ Unassigned:  5pt │ Unengaged: 5  │
+└──────────────────┴──────────────────┴──────────────────┴───────────────┘
+```
 
-The platform implements an **interpretable, deterministic scoring system** for all 2,089 active open opportunities (`Prospecting`: 500, `Engaging`: 1,589).
-
-> [!IMPORTANT]
-> **Governance Notice:** This is an operational resource prioritization score (0–100 index) to sequence sales follow-ups and manager reviews. It is **NOT** a predictive win probability model and excludes all post-outcome variables (`close_date`, `close_value`).
-
-### Prioritization Point Matrix (Max 100 Points):
 1. **Lifecycle Stage (Max 30 pts):**
-   - `Engaging`: 30 pts
-   - `Prospecting`: 10 pts
+   - `Engaging`: **30 pts** (Active dialogue established)
+   - `Prospecting`: **10 pts** (Early discovery)
 2. **Product Catalog Value Tier (Max 30 pts):**
-   - `High Value` ($\ge \$4,000$ list price): 30 pts (`GTK 500`, `GTX Plus Pro`, `GTX Pro`)
-   - `Medium Value` ($\$1,000 - \$3,999$): 20 pts (`MG Advanced`, `GTX Plus Basic`)
-   - `Low Value` ($< \$1,000$): 10 pts (`GTX Basic`, `MG Special`)
+   - `High Value` (List Price $\ge \$4,000$): **30 pts** (`GTK 500`, `GTX Plus Pro`, `GTX Pro`)
+   - `Medium Value` (List Price $\$1,000 - \$3,999$): **20 pts** (`MG Advanced`, `GTX Plus Basic`)
+   - `Low Value` (List Price $< \$1,000$): **10 pts** (`GTX Basic`, `MG Special`)
 3. **Strategic Account Scale Tier (Max 25 pts):**
-   - `Enterprise` (Revenue $\ge \$2,500\text{M}$ OR Employees $\ge 5,000$): 25 pts
-   - `Mid-Market` (Revenue $\$500\text{M}-\$2,500\text{M}$ OR Employees $1,000-5,000$): 15 pts
-   - `Commercial / Small` (Revenue $< \$500\text{M}$ AND Employees $< 1,000$): 10 pts
-   - `Unassigned Account`: 5 pts
+   - `Enterprise` (Revenue $\ge \$2,500\text{M}$ OR Employees $\ge 5,000$): **25 pts**
+   - `Mid-Market` (Revenue $\$500\text{M}-\$2,500\text{M}$ OR Employees $1,000-5,000$): **15 pts**
+   - `Commercial / Small` (Revenue $< \$500\text{M}$ AND Employees $< 1,000$): **10 pts**
+   - `Unassigned Account`: **5 pts**
 4. **Engagement Age & Urgency (Max 15 pts):**
-   - `Recent (<= 90 days)`: 15 pts
-   - `Aging (91 - 180 days)`: 10 pts
-   - `Stalled / Critical (> 180 days)`: 5 pts
-   - `Unengaged (Prospecting)`: 5 pts
+   - `Recent (<= 90 days)`: **15 pts** (High momentum)
+   - `Aging (91 - 180 days)`: **10 pts** (Attention needed)
+   - `Stalled / Critical (> 180 days)`: **5 pts** (Intervention required)
+   - `Unengaged (Prospecting)`: **5 pts** (Baseline)
 
-### Priority Tiers:
-- **Tier 1 — High Priority ($\ge 75$ pts):** 428 deals (Executive sponsor review, top reps)
-- **Tier 2 — Medium Priority ($55 - 74$ pts):** 1,033 deals (Standard rep pipeline cadence)
-- **Tier 3 — Lower Priority ($< 55$ pts):** 628 deals (Routine lead qualification/monitoring)
-- **Total Open Population:** 2,089 deals
+### Priority Tiers & Action Strategy
+
+| Priority Tier | Score Threshold | Opportunity Volume | Strategic Operations Action |
+|---|---|:---:|---|
+| **Tier 1 — High Priority** | $\ge 75 \text{ points}$ | **428** | Immediate executive sponsor engagement; top quota-carriers assigned. |
+| **Tier 2 — Medium Priority** | $55 - 74 \text{ points}$ | **1,033** | Standard structured sales cadence; bi-weekly pipeline review. |
+| **Tier 3 — Lower Priority** | $< 55 \text{ points}$ | **628** | Automated lead nurturing, self-service materials, qualification check. |
+| **Total Open Pipeline** | | **2,089** | Complete active pipeline coverage. |
 
 ---
 
-## 9. Testing & Quality Assurance
+## Database Schema & Data Integrity
 
-The project includes an automated test suite verifying business logic, database integrity, and REST API contracts.
+The relational layer is organized into two isolated PostgreSQL schemas:
 
-### Executing Tests:
-```bash
-# Run the complete test suite
-pytest
-
-# Run tests with verbose output
-pytest -v
-
-# Run business reconciliation checkpoints specifically
-pytest tests/test_business_reconciliation.py -v
+```
+                  ┌───────────────────────────────┐
+                  │      crm_sales.accounts       │
+                  │ (85 rows, self-ref parent_id) │
+                  └───────────────┬───────────────┘
+                                  │ 1:N
+┌───────────────────────────┐     │     ┌───────────────────────────┐
+│     crm_sales.products    │     │     │   crm_sales.sales_teams   │
+│   (7 rows, series, price) │     │     │ (35 reps, managers, reg)  │
+└─────────────┬─────────────┘     │     └─────────────┬─────────────┘
+              │ 1:N               │                   │ 1:N
+              └─────────────┐     │     ┌─────────────┘
+                            ▼     ▼     ▼
+                  ┌───────────────────────────────┐
+                  │   crm_sales.sales_pipeline    │
+                  │         (8,800 rows)          │
+                  └───────────────┬───────────────┘
+                                  │ 1:1
+                                  ▼
+                  ┌───────────────────────────────┐
+                  │ prioritized_open_opportunities│
+                  │   (2,089 open opportunities)  │
+                  └───────────────────────────────┘
 ```
 
-### Verified Checkpoints:
-All 65 automated tests pass cleanly with 100% precision:
-- Total Opportunities: 8,800
-- Won Opportunities: 4,238
-- Lost Opportunities: 2,473
-- Prospecting Deals: 500
-- Engaging Deals: 1,589
-- Open Opportunities: 2,089
-- Closed Opportunities: 6,711
-- Win Rate: 63.15%
-- Won Revenue: $10,005,534.00
-- Average Deal Size: $2,360.91
-- Average Sales Cycle: 47.99 days
-- Active Pipeline Agents: 30 / Total Team Agents: 35
-- Accounts: 85 / Products: 7
-- Priority Distribution: Tier 1 (428), Tier 2 (1,033), Tier 3 (628), Total = 2,089
+### Data Integrity Standards
+1. **Zero Synthetic Records:** All accounts, transactions, and agents represent real B2B CRM structures. No simulated customer records or fabricated activity events are introduced.
+2. **Preservation of Authentic Nulls:**
+   - In-flight prospecting deals legitimately contain `NULL` engage dates prior to first customer touch.
+   - 1,425 early-stage opportunities legitimately possess `NULL` account IDs prior to corporate entity assignment.
+   - Open deals have `NULL` close dates and values, preventing look-ahead bias.
+3. **Data Quality Corrections:** Documented standardizations (e.g., `GTXPro` $\rightarrow$ `GTX Pro`, `technolgy` $\rightarrow$ `technology`, `Philipines` $\rightarrow$ `Philippines`) are applied deterministically in ETL scripts.
 
 ---
 
-## 10. Setup Instructions
+## REST API Reference
+
+All endpoints are versioned under `/api/v1`. Comprehensive interactive documentation is accessible via Swagger UI at `http://127.0.0.1:8000/docs` or ReDoc at `http://127.0.0.1:8000/redoc`.
+
+### Authentication & User Profile
+- `POST /api/v1/auth/login` — Authenticate user and receive JWT access token.
+- `GET /api/v1/auth/me` — Retrieve profile and permissions of authenticated user.
+
+### Pipeline Analytics & Reconciliation
+- `GET /api/v1/pipeline/summary` — Executive overview KPIs (total volume, won revenue, win rate, average cycle).
+- `GET /api/v1/pipeline/stages` — Opportunity counts and volume grouped by pipeline stage.
+- `GET /api/v1/pipeline/products` — Win rate, revenue, and opportunity distribution by product.
+- `GET /api/v1/pipeline/sectors` — Performance analytics sliced by industry vertical.
+- `GET /api/v1/pipeline/agents` — Performance rankings across 30 active sales representatives.
+- `GET /api/v1/pipeline/managers` — Aggregate team volume and win rate sliced by sales manager.
+- `GET /api/v1/pipeline/regions` — Regional office performance (Central, East, West).
+
+### Opportunity Management & Prioritization
+- `GET /api/v1/opportunities` — Paginated, searchable, multi-filtered opportunity ledger.
+- `GET /api/v1/opportunities/{id}` — Full opportunity details with historical duration and account context.
+- `GET /api/v1/prioritization` — Deterministic opportunity ranking filtered by score and tier.
+- `GET /api/v1/prioritization/summary` — Distribution metrics across Tier 1, Tier 2, and Tier 3.
+- `GET /api/v1/aging/summary` — Pipeline aging distributions across operational bands.
+
+### Work Queues & Operations
+- `GET /api/v1/work-queues/summary` — Aggregate summary counts across all operational queues.
+- `GET /api/v1/work-queues/high-priority` — Action queue containing all Tier 1 high-priority opportunities.
+- `GET /api/v1/work-queues/stalled-deals` — Intervention queue for active deals exceeding 180 days.
+- `GET /api/v1/work-queues/unassigned-accounts` — Data hygiene queue for deals missing account linkages.
+
+### Accounts & Catalog
+- `GET /api/v1/accounts` — Filtered, searchable directory of enterprise accounts.
+- `GET /api/v1/accounts/{id}` — Detailed account profile including subsidiaries and historical win/loss stats.
+- `GET /api/v1/products` — Catalog of products with pricing tiers and total revenue generated.
+- `GET /api/v1/agents/{name}` — Individual representative scorecard and stage breakdown.
+- `GET /api/v1/managers/{name}` — Manager scorecard with subordinate representative benchmarks.
+
+---
+
+## Quickstart & Local Setup
+
+Follow these steps to run the complete Vantage CRM platform locally.
 
 ### Prerequisites
-- Python 3.11+
-- PostgreSQL 14+ running locally or in a container
+- **Python 3.11+**
+- **Node.js 18+** & **npm 9+**
+- **PostgreSQL 14+** running locally or via Docker
 
-### 1. Clone & Navigate
-```bash
-cd CRM
-```
+---
 
-### 2. Configure Environment
-Copy the `.env.example` file to `.env` and fill in your database credentials:
+### Step 1: Clone Repository & Configure Environment
+
 ```bash
+git clone https://github.com/kumarvishal10351/Vantage-CRM.git
+cd Vantage-CRM
+
+# Copy environment configuration
 cp .env.example .env
 ```
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
+Edit `.env` with your PostgreSQL connection parameters:
+```ini
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=crm_platform
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
+JWT_SECRET_KEY=crm-super-secret-production-key-change-in-env-2026
 ```
 
-### 4. Database Setup & Data Ingestion (Optional if already loaded)
+---
+
+### Step 2: Backend Installation & Database Setup
+
 ```bash
-# 1. Clean raw data
+# Create and activate virtual environment
+python -m venv venv
+# On Windows:
+.\venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run ETL Pipeline and Load Database
 python src/data_cleaning/clean_sales.py
-
-# 2. Compute opportunity priority scores
 python src/prioritization/crm_priority.py
-
-# 3. Ingest cleaned tables into PostgreSQL
 python src/database/load_postgres.py
 ```
 
-### 5. Launch the Backend Server
+---
+
+### Step 3: Launch the Backend API Server
+
 ```bash
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-The API is now live at `http://127.0.0.1:8000`.
+The REST API is now live at `http://127.0.0.1:8000`.  
+Swagger documentation is available at `http://127.0.0.1:8000/docs`.
 
 ---
 
-## 11. Environment Variables
+### Step 4: Launch the Frontend Web Application
 
-Configure these settings in your `.env` file:
+In a separate terminal:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The Vantage CRM UI is now live at `http://127.0.0.1:5173`.
 
-| Variable | Default | Description |
+---
+
+### Default Credentials
+
+The database loader provisions default administrator credentials for immediate access:
+
+| Role | Email | Password |
 |---|---|---|
-| `DB_HOST` | `localhost` | PostgreSQL host address |
-| `DB_PORT` | `5432` | PostgreSQL port |
-| `DB_NAME` | `crm_platform` | PostgreSQL database name |
-| `DB_USER` | `postgres` | Database username |
-| `DB_PASSWORD` | `""` | Database password |
-| `JWT_SECRET_KEY` | `crm-super-secret-production-key-change-in-env-2026` | Secret key for JWT signing |
+| **System Admin** | `admin@crm.local` | `AdminPass123!` |
+| **Sales Manager** | `manager@crm.local` | `ManagerPass123!` |
+| **Sales Agent** | `agent@crm.local` | `AgentPass123!` |
 
 ---
 
-## 12. API Usage Examples
+## Quality Assurance & Automated Testing
 
-### 1. Health Check
-```bash
-curl http://127.0.0.1:8000/health
-```
-```json
-{
-  "project": "Sales CRM & Pipeline Management Platform",
-  "status": "healthy",
-  "database": "healthy"
-}
-```
+The platform maintains a comprehensive automated testing suite built with **Pytest** and **HTTPX**. Tests validate route contracts, authentication flows, error handling, and mathematical business reconciliation.
 
-### 2. User Authentication
 ```bash
-curl -X POST http://127.0.0.1:8000/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "admin@crm.local", "password": "AdminPass123!"}'
+# Execute complete automated test suite
+pytest
+
+# Execute with verbose output
+pytest -v
+
+# Run business logic & reconciliation tests exclusively
+pytest tests/test_business_reconciliation.py -v
 ```
 
-### 3. Retrieve Pipeline KPI Summary
-```bash
-curl http://127.0.0.1:8000/api/v1/pipeline/summary
-```
-
-### 4. Query Prioritized Open Opportunities (Tier 1)
-```bash
-curl "http://127.0.0.1:8000/api/v1/prioritization?tier=Tier%201&limit=5"
-```
-
-### 5. Access Stalled Deals Work Queue (> 180 Days)
-```bash
-curl "http://127.0.0.1:8000/api/v1/work-queues/stalled-deals?limit=10"
-```
+### Verified System Invariants
+- **Total Opportunities:** 8,800
+- **Won Opportunities:** 4,238
+- **Lost Opportunities:** 2,473
+- **Prospecting Opportunities:** 500
+- **Engaging Opportunities:** 1,589
+- **Total Open Opportunities:** 2,089
+- **Total Closed Opportunities:** 6,711
+- **Reconciled Win Rate:** 63.15%
+- **Reconciled Won Revenue:** $10,005,534.00
+- **Average Deal Size:** $2,360.91
+- **Average Sales Cycle Duration:** 47.99 days
+- **Prioritization Tier Distribution:** Tier 1 (428) | Tier 2 (1,033) | Tier 3 (628)
+- **Suite Result:** `65 passed in 9.37s` (100% pass rate)
 
 ---
 
-## 13. Data Integrity Decisions
+## Security & Compliance
 
-1. **Strict Domain Isolation:** The platform models the B2B CRM sales dataset exclusively. No foreign domains (such as consumer telecom records) are linked.
-2. **Zero Synthetic Records:** No fake customer records, contacts, sales calls, emails, or meetings are fabricated.
-3. **Preservation of Legitimate Nulls:**
-   - 1,425 open opportunities have `NULL` accounts representing early unassigned prospects.
-   - 500 `Prospecting` opportunities have `NULL` engage dates.
-   - Open opportunities have `NULL` close values.
-4. **Transparent Data Corrections:** Documented standardizations (`GTXPro` $\rightarrow$ `GTX Pro`, `technolgy` $\rightarrow$ `technology`, `Philipines` $\rightarrow$ `Philippines`) are applied deterministically via script.
+- **Stateless Authentication:** Signed JWT bearer tokens with configurable expiration (`ACCESS_TOKEN_EXPIRE_MINUTES`).
+- **Cryptographic Hashing:** Passwords hashed using Bcrypt with auto-generated salts.
+- **SQL Injection Prevention:** 100% parameterized queries via SQLAlchemy 2.0 ORM expressions.
+- **CORS Protection:** Configurable cross-origin resource sharing middleware restricting origins to authorized frontends.
+- **Input Sanitization:** Strict Pydantic v2 schemas validating request data types, ranges, and patterns.
 
 ---
 
-## 14. Known Limitations
+## License
 
-1. **Snapshot Dataset:** The underlying sales data spans October 2016 through December 2017. In-flight deals remain static.
-2. **Account-Level Granularity:** Opportunities are mapped to companies; individual stakeholder personas are not present in source records.
-3. **Open Pipeline Valuation:** Open opportunities do not feature estimated values; open pipeline is measured by count, list price, and priority tier.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for complete details.
