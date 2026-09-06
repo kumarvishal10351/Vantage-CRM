@@ -48,10 +48,10 @@ export const Sidebar = () => {
           </div>
           <div className="flex flex-col min-w-0 leading-none">
             <span className="font-headline-sm text-headline-sm tracking-tight text-on-surface truncate">
-              Vantage CRM
+              Vantage
             </span>
             <span className="font-label-xs-mono text-label-xs-mono text-secondary uppercase tracking-wider mt-space-2xs">
-              Sales Cloud • Ops
+              Revenue Operations
             </span>
           </div>
         </div>

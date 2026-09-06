@@ -1,13 +1,13 @@
-# Vantage CRM
+# Vantage
 
 <p align="center">
-  <img src="docs/screenshots/overview.png" alt="Vantage CRM Executive Dashboard" width="100%" />
+  <img src="docs/screenshots/overview.png" alt="Vantage Executive Dashboard" width="100%" />
 </p>
 
 <p align="center">
-  <strong>Enterprise Sales Operations & Revenue Orchestration Platform</strong>
+  <strong>Enterprise Revenue Operations & Sales Orchestration Platform</strong>
   <br />
-  A high-throughput, audited full-stack CRM engineered for high-velocity B2B sales organizations.
+  A high-throughput, audited full-stack revenue platform engineered for high-velocity B2B sales organizations.
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11+" />
   <img src="https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Tests-65%2F65%20Passing-brightgreen?style=flat-square" alt="Tests" />
+  <img src="https://img.shields.io/badge/Tests-72%2F72%20Passing-brightgreen?style=flat-square" alt="Tests" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License" />
 </p>
 

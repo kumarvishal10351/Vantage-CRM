@@ -43,10 +43,10 @@ export const Login = () => {
             <span className="material-symbols-outlined text-[26px]">insights</span>
           </div>
           <h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight">
-            Vantage CRM
+            Vantage
           </h1>
           <span className="font-label-xs-mono text-label-xs-mono text-secondary uppercase tracking-wider mt-1">
-            Enterprise Sales Operations Platform
+            Enterprise Revenue Operations Platform
           </span>
         </div>
 

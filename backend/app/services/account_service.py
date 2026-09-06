@@ -53,15 +53,18 @@ class AccountService:
 
         account_reads = []
         for a in items:
-            t = classify_account_tier(float(a.revenue), int(a.employees), a.account)
+            rev_val = float(a.revenue) if a.revenue is not None else 0.0
+            emp_val = int(a.employees) if a.employees is not None else 0
+            yr_val = int(a.year_established) if a.year_established is not None else 2000
+            t = classify_account_tier(rev_val, emp_val, a.account)
             account_reads.append(
                 AccountRead(
                     account=a.account,
-                    sector=a.sector,
-                    year_established=a.year_established,
-                    revenue=float(a.revenue),
-                    employees=int(a.employees),
-                    office_location=a.office_location,
+                    sector=a.sector or "Unknown",
+                    year_established=yr_val,
+                    revenue=rev_val,
+                    employees=emp_val,
+                    office_location=a.office_location or "Unknown",
                     subsidiary_of=a.subsidiary_of,
                     account_tier=t,
                 )
@@ -91,15 +94,18 @@ class AccountService:
 
         stats_dict = self.repo.get_account_opportunity_stats(account_id)
         subsidiaries = self.repo.get_subsidiaries(account_id)
-        tier = classify_account_tier(float(acc.revenue), int(acc.employees), acc.account)
+        rev_val = float(acc.revenue) if acc.revenue is not None else 0.0
+        emp_val = int(acc.employees) if acc.employees is not None else 0
+        yr_val = int(acc.year_established) if acc.year_established is not None else 2000
+        tier = classify_account_tier(rev_val, emp_val, acc.account)
 
         return AccountDetail(
             account=acc.account,
-            sector=acc.sector,
-            year_established=acc.year_established,
-            revenue=float(acc.revenue),
-            employees=int(acc.employees),
-            office_location=acc.office_location,
+            sector=acc.sector or "Unknown",
+            year_established=yr_val,
+            revenue=rev_val,
+            employees=emp_val,
+            office_location=acc.office_location or "Unknown",
             subsidiary_of=acc.subsidiary_of,
             account_tier=tier,
             stats=AccountStats(**stats_dict),

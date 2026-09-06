@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../api/client';
 
 export const Settings = () => {
   const { user } = useAuth();
@@ -10,7 +11,8 @@ export const Settings = () => {
   const checkHealth = async () => {
     setHealthLoading(true);
     try {
-      const res = await axios.get('http://127.0.0.1:8000/health');
+      const healthUrl = `${API_BASE_URL.replace(/\/api\/v1\/?$/, '')}/health`;
+      const res = await axios.get(healthUrl);
       setHealth(res.data);
     } catch {
       setHealth({ status: 'offline', database: 'unreachable' });
@@ -36,7 +38,7 @@ export const Settings = () => {
           System &amp; API Configuration
         </h1>
         <p className="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
-          Vantage CRM platform parameters, backend endpoint telemetry, and user profile.
+          Vantage platform parameters, backend endpoint telemetry, and user profile.
         </p>
       </div>
 
@@ -64,7 +66,7 @@ export const Settings = () => {
               API Base URL
             </span>
             <span className="font-mono text-sm font-semibold text-on-surface mt-1 block">
-              {import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'}
+              {API_BASE_URL}
             </span>
           </div>
 

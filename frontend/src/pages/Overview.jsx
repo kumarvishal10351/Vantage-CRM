@@ -28,7 +28,7 @@ export const Overview = () => {
       setRegions(regRes.data);
     } catch (err) {
       console.error(err);
-      setError('Unable to fetch pipeline telemetry. Ensure the backend is online at http://127.0.0.1:8000.');
+      setError('Unable to fetch pipeline telemetry. Please verify backend service connectivity.');
     } finally {
       setLoading(false);
     }

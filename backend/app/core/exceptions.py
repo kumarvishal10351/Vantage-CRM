@@ -1,5 +1,8 @@
+import logging
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
+
+logger = logging.getLogger("backend.app.exceptions")
 
 class AppException(Exception):
     def __init__(self, message: str, status_code: int = status.HTTP_400_BAD_REQUEST, error_code: str = "BAD_REQUEST"):
@@ -53,6 +56,9 @@ async def app_exception_handler(request: Request, exc: AppException):
     )
 
 async def unhandled_exception_handler(request: Request, exc: Exception):
+    logger.exception(
+        f"Unhandled server exception during {request.method} {request.url.path}: {exc}"
+    )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
