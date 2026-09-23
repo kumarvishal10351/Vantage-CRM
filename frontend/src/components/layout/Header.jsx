@@ -16,12 +16,7 @@ export const Header = ({ onSearch }) => {
 
   return (
     <header className="fixed top-0 left-64 right-0 h-14 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/30 z-40 flex items-center justify-between px-space-lg select-none">
-      <div className="flex items-center gap-space-lg flex-1 max-w-2xl">
-        <div className="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
-          <span className="font-semibold text-on-surface uppercase tracking-wider">Enterprise</span>
-          <span className="text-outline">/</span>
-          <span className="truncate text-secondary">Revenue Operations</span>
-        </div>
+      <div className="flex items-center gap-space-lg flex-1 max-w-xl">
         <div className="relative flex-1 max-w-md">
           <span className="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-[18px] text-secondary">
             search
@@ -41,10 +36,6 @@ export const Header = ({ onSearch }) => {
       </div>
 
       <div className="flex items-center gap-space-md">
-        <div className="hidden xl:flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant/30 font-label-xs-mono text-label-xs-mono text-secondary">
-          <span className="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>
-          <span>Live Pipeline • 3 Regions Active</span>
-        </div>
 
         <button
           onClick={() => navigate('/opportunities')}

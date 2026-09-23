@@ -11,6 +11,7 @@
 </p>
 
 <p align="center">
+  <a href="https://vantage-crm-sand.vercel.app/"><img src="https://img.shields.io/badge/App%20Live-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="App Live on Vercel" /></a>
   <a href="https://crm-backend-34is.onrender.com/docs"><img src="https://img.shields.io/badge/API%20Live-Render%20Cloud-00c853?style=for-the-badge&logo=render&logoColor=white" alt="API Live on Render" /></a>
   <a href="https://crm-backend-34is.onrender.com/docs"><img src="https://img.shields.io/badge/OpenAPI-3.1%20Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger Docs" /></a>
   <img src="https://img.shields.io/badge/Tests-72%2F72%20Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest 72/72 Passing" />
@@ -26,11 +27,11 @@
 
 | Component | Provider | Status | Public URL |
 |---|---|---|---|
+| **Frontend Web Client** | Vercel Edge Network | ![Live](https://img.shields.io/badge/Status-Live-2ea44f?style=flat-square) | [`https://vantage-crm-sand.vercel.app`](https://vantage-crm-sand.vercel.app) |
 | **Production REST API** | Render Cloud (Frankfurt/Oregon) | ![Operational](https://img.shields.io/badge/Status-Live-2ea44f?style=flat-square) | [`https://crm-backend-34is.onrender.com`](https://crm-backend-34is.onrender.com) |
 | **Interactive API Documentation** | Swagger UI / OpenAPI 3.1 | ![Interactive](https://img.shields.io/badge/Docs-Live%20Swagger-blue?style=flat-square) | [`https://crm-backend-34is.onrender.com/docs`](https://crm-backend-34is.onrender.com/docs) |
 | **Alternative API Specs** | Redocly Specification | ![Interactive](https://img.shields.io/badge/Specs-Redoc-lightgrey?style=flat-square) | [`https://crm-backend-34is.onrender.com/redoc`](https://crm-backend-34is.onrender.com/redoc) |
 | **Engine Health & DB Probe** | Zero-leakage Health Check | ![Healthy](https://img.shields.io/badge/Probe-Healthy-brightgreen?style=flat-square) | [`https://crm-backend-34is.onrender.com/health`](https://crm-backend-34is.onrender.com/health) |
-| **Frontend Web Client** | Vercel Edge Network | ![Active](https://img.shields.io/badge/Vercel-Vite%20React%2019-black?style=flat-square&logo=vercel) | Configurable via Vercel Edge (`frontend/`) |
 
 ---
 
@@ -391,6 +392,7 @@ The platform is initialized with test credentials across all access tiers:
    - `ENVIRONMENT`: `production`
 
 ### Frontend Deployment (Vercel)
+- **Production URL**: [`https://vantage-crm-sand.vercel.app`](https://vantage-crm-sand.vercel.app)
 1. Import repository on Vercel.
 2. Set **Root Directory** to `frontend`.
 3. Framework Preset: **Vite**.
